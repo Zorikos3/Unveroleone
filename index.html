@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vylvo - Your Linktree Alternative with a Stylish Hacker Theme">
+    <title>Unveroleone - Bio ⚙</title>
+	<link rel="icon" type="image/ico" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset and Body Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background: linear-gradient(135deg, rgba(70, 0, 200, 1), rgba(0, 0, 50, 1));
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow-y: auto;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Full-screen cover for the "Click Anywhere" button */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            cursor: pointer;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hidden content to be revealed */
+        .content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 5;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .description {
+            margin-top: 20px;
+            font-size: 1rem;
+            max-width: 600px;
+            line-height: 1.5;
+            color: #ccc;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #ccc;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ccc; }
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .link {
+            display: inline-block;
+            background: rgba(0, 0, 100, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+            width: 100%;
+            text-align: center;
+        }
+
+        .link:hover {
+            background: rgba(0, 0, 255, 0.8);
+            transform: translateY(-5px);
+            opacity: 1;
+        }
+
+        .link:active {
+            transform: translateY(2px);
+        }
+
+        /* Sections */
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
+        /* Profile Picture */
+        .pfp {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* FPS and MS Counter */
+        #fps-counter, #ms-counter {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 20;
+        }
+
+        #ms-counter {
+            top: 40px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .links-container {
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .description {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay with click event -->
+    <div id="overlay" class="overlay">
+        Click Anywhere
+    </div>
+
+    <!-- Hidden content to be revealed -->
+    <div class="content">
+        <!-- Profile Picture -->
+        <img src="pfp.png" alt="Profile Picture" class="pfp">
+
+        <h1>Vylvo</h1>
+        <p>Welcome to my private bio-link, you can see more information about me here!</p>
+
+        <!-- Section 1: About Me -->
+        <div class="section glass">
+            <h2>About Me:</h2>
+            <p>Hi, I'm Leonardo! I'm a tech enthusiast based in switzerland who loves coding and cybersecurity. From building custom gadgets to coding cool projects, I'm always exploring new ways to push the boundaries of technology.</p>
+        </div>
+
+        <!-- Section 2: M5Stick C Plus -->
+        <div class="section glass">
+            <h2>M5Stick C Plus 2 Diagrams</h2>
+            <p>Some module diagrams for the M5 Stick C Plus 2:</p>
+            <img src="nrf24.png" alt="NRF24 Module">
+            <img src="cc1101.png" alt="CC1101 Module">
+            <img src="microsd.png" alt="MicroSD module">
+        </div>
+
+        <!-- Section 3: Boot Image Resizer -->
+        <div class="section glass">
+            <h2>Boot Image Resizer for Bruce</h2>
+            <p>Resize your boot images with ease! Click below to use tool:</p>
+            <a href="https://zorikos3.github.io/Vylvo/" target="_blank" class="link">Boot Image Resizer 🛠️</a>
+        </div>
+
+        <!-- Links Section -->
+        <div class="links-container">
+            <a href="https://buymeacoffee.com/leonardoiln" target="_blank" class="link glass">Support Me ☕</a>
+            <a href="https://github.com/unveroleone/HackStarter-Kit" target="_blank" class="link glass">HackStarter-Kit 🛠️</a>
+            <a href="https://Bruce.computer" target="_blank" class="link glass">Bruce Firmware 💾</a>
+            <a href="https://docs.m5stack.com/en/uiflow/m5burner/intro" target="_blank" class="link glass">M5 Burner 🔥</a>
+            <a href="https://github.com/unveroleone/HackStarter-Kit/blob/main/MyProducts/README.md" target="_blank" class="link glass">AliExpress Modules + Devices List🛒</a>
+            <a href="https://github.com/unveroleone" target="_blank" class="link glass">GitHub 📡</a>
+            <a href="https://discord.com/invite/R8QJKCFYr9" target="_blank" class="link glass">Discord 🎮</a>
+            <a href="https://www.youtube.com/@unveroleone" target="_blank" class="link glass">YouTube 🎥</a>
+            <a href="https://www.tiktok.com/@vylvo" target="_blank" class="link glass">TikTok 🎵</a>
+        </div>
+    </div>
+
+    <!-- Audio Player for Music -->
+    <audio id="background-music" loop>
+        <source src="bg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- FPS and MS Counter Display -->
+    <div id="fps-counter">FPS: 0</div>
+    <div id="ms-counter">MS: 0</div>
+
+    <script>
+        // Handle the click event to remove the overlay and show the content
+        document.getElementById('overlay').addEventListener('click', function() {
+            // Hide the overlay and show the content
+            document.getElementById('overlay').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+            document.querySelector('.content').style.opacity = 1;
+
+            // Play the background music
+            var music = document.getElementById('background-music');
+            music.play();
+
+            // Scroll to the top of the page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // FPS and MS Counter
+        let lastTime = 0;
+        let fps = 0;
+        let ms = 0;
+
+        function updateFPS(timestamp) {
+            if (lastTime) {
+                fps = Math.round(1000 / (timestamp - lastTime));
+                ms = timestamp - lastTime;
+            }
+            lastTime = timestamp;
+            document.getElementById('fps-counter').textContent = 'FPS: ' + fps;
+            document.getElementById('ms-counter').textContent = 'MS: ' + ms.toFixed(2);
+            requestAnimationFrame(updateFPS);
+        }
+
+        // Start FPS and MS calculation
+        requestAnimationFrame(updateFPS);
+    </script>
+</body>
+</html>
